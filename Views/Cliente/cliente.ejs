@@ -97,7 +97,7 @@
                                                       <td><%= cliente.Telefono %></td>
                                                       <td>
                                                             <a href="/cliente_edit/<%= cliente.Id_cliente %>" class="btn btn-info"><i class='bx bxs-receipt'></i></a>
-                                                            <a href="/cliente" class="btn btn-danger"><i class='bx bxs-trash' ></i></a>
+                                                            <a href="/delete/<%= cliente.Id_cliente %>" class="btn btn-danger"><i class='bx bxs-trash' ></i></a>
                                                       </td>
                                                             
                                                 </tr>
@@ -130,10 +130,6 @@
 
                                           <button type="submit" class="btn btn-primary">
                                                 <i class='bx bxs-save bx-md' ></i>
-                                          </button>
-
-                                          <button type="submit" class="btn btn-secondary">
-                                                <i class='bx bxs-x-circle bx-md'></i>
                                           </button>
                                           </form>
 

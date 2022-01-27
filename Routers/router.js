@@ -29,7 +29,20 @@ router.get('/cliente_edit/:Id_cliente', (req, res)=>{
                   res.render('../Views/Cliente/cliente_edit', { cliente:results[0] });
             }
       })      
-})      
+})    
+
+router.get('/delete/:Id_cliente', (req, res)=>{
+      const id = req.params.Id_cliente;
+      conexion.query('DELETE FROM cliente WHERE Id_cliente = ?',[id],(error, results)=>{
+            if(error){
+                  throw error;
+            }
+            else{
+                  res.redirect('/cliente');
+            }
+      })
+
+});
 
 const crud = require('../Controllers/crud');
 router.post('/save', crud.save)
