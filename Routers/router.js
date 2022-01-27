@@ -61,7 +61,7 @@ router.get('/cardex', (req, res)=> {
 
 router.get('/cardex_edit/:Id_producto', (req, res)=>{
       const id = req.params.Id_producto;
-      conexion.query('SELECT * FROM cardex WHERE Id_cliente = ?', [id], (error, results) => {
+      conexion.query('SELECT * FROM cardex WHERE Id_producto = ?', [id], (error, results) => {
             if(error){
                   throw error;
             }
