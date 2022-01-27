@@ -8,6 +8,8 @@ router.get('/', (req, res)=> {
       
 })
 
+// RUTAS CLIENTES 
+
 router.get('/cliente', (req, res)=> {
       conexion.query('SELECT * FROM cliente', (error, results) => {
             if(error){
@@ -44,9 +46,52 @@ router.get('/delete/:Id_cliente', (req, res)=>{
 
 });
 
+// RUTAS CARDEX
+
+router.get('/cardex', (req, res)=> {
+      conexion.query('SELECT * FROM cardex', (error, results) => {
+            if(error){
+                  throw error;
+            }
+            else{
+                  res.render('../Views/Cardex/cardex', { results:results });
+            }
+      })
+})
+
+router.get('/cardex_edit/:Id_producto', (req, res)=>{
+      const id = req.params.Id_producto;
+      conexion.query('SELECT * FROM cardex WHERE Id_cliente = ?', [id], (error, results) => {
+            if(error){
+                  throw error;
+            }
+            else{
+                  res.render('../Views/Cardex/cardex_edit', { cardex:results[0] });
+            }
+      })      
+})    
+
+router.get('/delete_C/:Id_producto', (req, res)=>{
+      const id = req.params.Id_producto;
+      conexion.query('DELETE FROM cardex WHERE Id_producto = ?',[id],(error, results)=>{
+            if(error){
+                  throw error;
+            }
+            else{
+                  res.redirect('/cardex');
+            }
+      })
+
+});
+
+//CONTROLADORES CLIENTES
+
 const crud = require('../Controllers/crud');
 router.post('/save', crud.save)
 router.post('/update', crud.update)
 
+//CONTROLADORES CARDEX
 
+router.post('/saveCardex', crud.saveCardex)
+router.post('/update', crud.update)
 module.exports = router;
