@@ -39,7 +39,6 @@ exports.saveCardex = (req, res) => {
       const nombre =  req.body.nombre;
       const cantidad =  req.body.cantidad;
       const precio =  req.body.precio;
-      
 
       conexion.query('INSERT INTO cardex SET ?', {Nombre:nombre, Cantidad:cantidad, Precio:precio}, (error,results) => {
             if(error){
@@ -56,12 +55,44 @@ exports.updateCardex = (req, res) => {
       const cantidad =  req.body.cantidad;
       const precio =  req.body.precio;
       
-
       conexion.query('UPDATE cardex SET ? WHERE Id_producto = ?', [{Nombre:nombre, Cantidad:cantidad, Precio:precio}, id], (error,results) => {
             if(error){
                   console.log(error);
             }else{
                   res.redirect('/cardex')
+            }
+      })
+};
+
+//CRUD COMPRA
+
+exports.saveCompra = (req, res) => {
+      const empresa =  req.body.empresa;
+      const cantidad =  req.body.cantidad;
+      const precio =  req.body.precio;
+      const preciototal =  req.body.preciototal;
+      
+      conexion.query('INSERT INTO compra SET ?', {Empresa:empresa, Cantidad:cantidad, Precio:precio, PrecioTotal:preciototal}, (error,results) => {
+            if(error){
+                  console.log(error);
+            }else{
+                  res.redirect('/compra')
+            }
+      })
+};
+
+exports.updateCompra = (req, res) => {
+      const id = req.body.id;
+      const empresa =  req.body.empresa;
+      const cantidad =  req.body.cantidad;
+      const precio =  req.body.precio;
+      const preciototal =  req.body.preciototal;
+
+      conexion.query('UPDATE compra SET ? WHERE Id_compra = ?', [{Empresa:empresa, Cantidad:cantidad, Precio:precio, PrecioTotal:preciototal}, id], (error,results) => {
+            if(error){
+                  console.log(error);
+            }else{
+                  res.redirect('/compra')
             }
       })
 };

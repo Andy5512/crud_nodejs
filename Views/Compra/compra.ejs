@@ -11,7 +11,7 @@
             <!--Usamos Boxicons-->
             <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
 
-            <title>Cardex</title>
+            <title>Compra</title>
 
             <script>
                   function validar(e) {
@@ -52,11 +52,11 @@
                                           </li>
 
                                           <li class="nav-item">
-                                                <a class="nav-link active" aria-current="page" href="/">Menu</a>
+                                                <a class="nav-link active" aria-current="page" href="/cardex">Cardex</a>
                                           </li>
 
                                           <li class="nav-item">
-                                                <a class="nav-link active" aria-current="page" href="/compra">Compra</a>
+                                                <a class="nav-link active" aria-current="page" href="/">Menu</a>
                                           </li>
                                           
                                           <li class="nav-item">
@@ -79,23 +79,25 @@
                                     <thead>
                                           <tr>
                                                 <th scope="col">N°</th>
-                                                <th scope="col">Nombre</th>
+                                                <th scope="col">Producto</th>
                                                 <th scope="col">Cantidad</th>
                                                 <th scope="col">Precio</th>
+                                                <th scope="col">Precio Total</th>
                                                 <th scope="col">Actions</th>
                                           </tr>
                                     </thead>
 
                                     <tbody>
-                                          <% results.forEach((cardex) => { %>
+                                          <% results.forEach((compra) => { %>
                                                 <tr>
-                                                      <td><%= cardex.Id_producto %></td>
-                                                      <td><%= cardex.Nombre %></td>
-                                                      <td><%= cardex.Cantidad %></td>
-                                                      <td><%= cardex.Precio %></td>
+                                                      <td><%= compra.Id_compra %></td>
+                                                      <td><%= compra.Empresa %></td>
+                                                      <td><%= compra.Cantidad %></td>
+                                                      <td><%= compra.Precio %></td>
+                                                      <td><%= compra.PrecioTotal %></td>
                                                       <td>
-                                                            <a href="/cardex_edit/<%= cardex.Id_producto %>" class="btn btn-info"><i class='bx bxs-receipt'></i></a>
-                                                            <a href="/delete_C/<%= cardex.Id_producto %>" class="btn btn-danger"><i class='bx bxs-trash' ></i></a>
+                                                            <a href="/compra_edit/<%= compra.Id_compra %>" class="btn btn-info"><i class='bx bxs-receipt'></i></a>
+                                                            <a href="/deleteCompra/<%= compra.Id_compra %>" class="btn btn-danger"><i class='bx bxs-trash' ></i></a>
                                                       </td>
                                                             
                                                 </tr>
@@ -108,23 +110,27 @@
                               <div class="card"  >  
                                     <div class="card-body">
 
-                                          <form action="/saveCardex" method="POST">
-                                          <div class="form-group">
-                                                <input type="text" id="nombre" name="nombre" onkeypress="return validar(event)" placeholder="Nombre" class="form-control" autofocus>
-                                          </div>
-                                          <br>
-                                          <div class="form-group">
-                                                <input type="number" id="cantidad" name="cantidad" placeholder="Cantidad" class="form-control">
-                                          </div>
-                                          <br>
-                                          <div class="form-group">
-                                                <input type="number" id="precio" name="precio" placeholder="Precio" class="form-control">
-                                          </div>
-                                          <br>
+                                          <form action="/saveCompra" method="POST">
+                                                <div class="form-group">
+                                                      <input type="text" id="empresa" name="empresa" onkeypress="return validar(event)" placeholder="Nombre" class="form-control" autofocus>
+                                                </div>
+                                                <br>
+                                                <div class="form-group">
+                                                      <input type="number" id="cantidad" name="cantidad" placeholder="Cantidad" class="form-control">
+                                                </div>
+                                                <br>
+                                                <div class="form-group">
+                                                      <input type="number" id="precio" name="precio" placeholder="Precio" class="form-control">
+                                                </div>
+                                                <br>
+                                                <div class="form-group">
+                                                      <input type="number" id="preciototal" name="preciototal" placeholder="Precio Total" class="form-control">
+                                                </div>
+                                                <br>
 
-                                          <button type="submit" class="btn btn-primary">
-                                                <i class='bx bxs-save bx-md' ></i>
-                                          </button>
+                                                <button type="submit" class="btn btn-primary">
+                                                      <i class='bx bxs-save bx-md' ></i>
+                                                </button>
                                           </form>
 
                                     </div>

@@ -84,6 +84,44 @@ router.get('/delete_C/:Id_producto', (req, res)=>{
 
 });
 
+//RUTAS COMPRAS
+
+router.get('/compra', (req, res)=> {
+      conexion.query('SELECT * FROM compra', (error, results) => {
+            if(error){
+                  throw error;
+            }
+            else{
+                  res.render('../Views/Compra/compra', { results:results });
+            }
+      })
+})
+
+router.get('/compra_edit/:Id_compra', (req, res)=>{
+      const id = req.params.Id_compra;
+      conexion.query('SELECT * FROM compra WHERE Id_compra = ?', [id], (error, results) => {
+            if(error){
+                  throw error;
+            }
+            else{
+                  res.render('../Views/Compra/compra_edit', { compra:results[0] });
+            }
+      })      
+})    
+
+router.get('/deleteCompra/:Id_compra', (req, res)=>{
+      const id = req.params.Id_compra;
+      conexion.query('DELETE FROM compra WHERE Id_compra = ?',[id],(error, results)=>{
+            if(error){
+                  throw error;
+            }
+            else{
+                  res.redirect('/compra');
+            }
+      })
+
+});
+
 //CONTROLADORES CLIENTES
 
 const crud = require('../Controllers/crud');
@@ -93,5 +131,11 @@ router.post('/update', crud.update)
 //CONTROLADORES CARDEX
 
 router.post('/saveCardex', crud.saveCardex)
-router.post('/update', crud.update)
+router.post('/updateCardex', crud.updateCardex)
+
+//CONTROLADORES COMPRA
+
+router.post('/saveCompra', crud.saveCompra)
+router.post('/updateCompra', crud.updateCompra)
+
 module.exports = router;
