@@ -121,12 +121,53 @@ router.get('/deleteCompra/:Id_compra', (req, res)=>{
       })
 
 });
+//rutas ventas
+router.get('/venta', (req, res)=> {
+      conexion.query('SELECT * FROM venta', (error, results) => {
+            if(error){
+                  throw error;
+            }
+            else{
+                  res.render('../Views/Venta/venta', { results:results });
+            }
+      })
+})
+
+router.get('/venta_edit/:Id_venta', (req, res)=>{
+      const id = req.params.Id_venta;
+      conexion.query('SELECT * FROM venta WHERE Id_venta = ?', [id], (error, results) => {
+            if(error){
+                  throw error;
+            }
+            else{
+                  res.render('../Views/Venta/venta_edit', { venta:results[0] });
+            }
+      })      
+})    
+
+router.get('/deleteVenta/:Id_venta', (req, res)=>{
+      const id = req.params.Id_venta;
+      conexion.query('DELETE FROM venta WHERE Id_venta = ?',[id],(error, results)=>{
+            if(error){
+                  throw error;
+            }
+            else{
+                  res.redirect('/venta');
+            }
+      })
+
+});
 
 //CONTROLADORES CLIENTES
 
 const crud = require('../Controllers/crud');
 router.post('/save', crud.save)
 router.post('/update', crud.update)
+
+//controladores venta
+
+router.post('/saveVenta', crud.saveVenta)
+router.post('/updateVenta', crud.updateVenta)
 
 //CONTROLADORES CARDEX
 

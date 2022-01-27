@@ -96,3 +96,34 @@ exports.updateCompra = (req, res) => {
             }
       })
 };
+//crud venta
+exports.saveVenta = (req, res) => {
+      const nombrecliente =  req.body.nombrecliente;
+      const producto =  req.body.producto;
+      const cantidad =  req.body.cantidad;
+      const total =  req.body.total;
+      
+      conexion.query('INSERT INTO venta SET ?', {NombreCliente:nombrecliente, Producto:producto, Cantidad:cantidad, Total:total}, (error,results) => {
+            if(error){
+                  console.log(error);
+            }else{
+                  res.redirect('/venta')
+            }
+      })
+};
+
+exports.updateVenta = (req, res) => {
+      const id = req.body.id;
+      const nombrecliente =  req.body.nombrecliente;
+      const producto =  req.body.producto;
+      const cantidad =  req.body.cantidad;
+      const total =  req.body.total;
+
+      conexion.query('UPDATE venta SET ? WHERE Id_venta = ?', [{NombreCliente:nombrecliente, Producto:producto, Cantidad:cantidad, Total:total}, id], (error,results) => {
+            if(error){
+                  console.log(error);
+            }else{
+                  res.redirect('/venta')
+            }
+      })
+};
